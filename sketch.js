@@ -1,6 +1,7 @@
 /***********************************************************************************
   BUTTONS AND TIMERS
   by COURTNEY CROTHER 
+  Timer by Scott Kidall 
   
   DESCRIPTION:
 
@@ -10,11 +11,12 @@
 ***********************************************************************************/
 // Global Variables
 
-var pickButton; 
 var tiaButton;
 var pietroButton;
 var wrongButton
 var simpleTimer;
+var correctButton;
+var yTextPos = 60;
 
 //images 
 imgAnimal = [];
@@ -22,14 +24,13 @@ imgAnimal = [];
 
 //load photos 
 function preload() {
-
-	//images
+	//load images
 	imgAnimal[0] = loadImage('assets/Tia_NH.png');
 	imgAnimal[1] = loadImage('assets/Pietro_NH.png');
 	imgAnimal[2] = loadImage('assets/acnh_back.jpg');
 }
 
-//center things, call functions 
+//center things, call timers and buttons
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -41,48 +42,29 @@ function setup() {
   simpleTimer = new Timer(10000);
   simpleTimer.start();
 
- 	// makeWrongButton()
-	makePickButton();
+ 	// make buttons
 	makeTiaButton();
 	makePietroButton();
-	
+
  }
 
 
  function draw() {
   background(255, 255,255);
+  frameRate(60);
+ 
+  textSize(45);
+  fill(200, 30, 90);
+  text("Quickly! Which Villager is cuter?", width/2, height/8);
 
   //timer
   updateTimer();
-
-  textSize(45);
-  fill(255, 120,0);
-  text("Which Villager is cuter?", width/2, height/8);
  
  //draw buttons
  tiaButton.draw();
  pietroButton.draw();
 
 }
-
-function updateTimer() {
-  if( simpleTimer.expired() ) {
-  	fill(255,0,0);
-	textSize(300);
-	text( "OUT OF TIME", midX, midY );
-	frameRate(2);
-  }
-  else {
-  	
-  		fill(255, 255, 0);
-  		text ('correct!');
-  }
-}
-
-function makePickButton () {
-
-}
-
 
 function makeTiaButton(){
 
@@ -96,14 +78,12 @@ function makeTiaButton(){
 	tiaButton.color = '#00000000';
 	tiaButton.stroke = '#00000000';
 
-
 	//make it normal sized 
 	tiaButton.width = imgAnimal[0].width;
   	tiaButton.height = imgAnimal[0].height;
 
 	//location of button 
 	tiaButton.locate(2*(width/5) - tiaButton.width/2, height/1.5 - tiaButton.height/2);
-
 }
 
 
@@ -132,17 +112,39 @@ function makePietroButton () {
 
 tiaButtonPressed = function() {
 	drawFunction = drawWrong;
+	text('wrong', 400, 400);
 
 }
 
 pietroButtonPressed = function() {
-	drawFunction = drawWrong;
+	drawFunction = drawCorrect;
 	
 }
 
 drawWrong = function() {
+	textSize(20);
+	fill(255, 0, 0 );
+	text('Wrong', 1000 , 1000);
 
+}
 
+drawCorrect = function() {
+	textSize(20);
+	fill(0, 225, 0 );
+	text('Correct', 1000, 1000);
+}
+
+function updateTimer() {
+  if( simpleTimer.expired() ) {
+  	fill(255,0,0);
+	textSize(100);
+	text( "Out of Time!", 800, 1000);
+	frameRate(2);
+  }
+  else {
+  		fill(200, 30, 90);
+    	text( Math.round(simpleTimer.getRemainingTime()/1000), width/2, yTextPos )
+  }
 }
 
 

@@ -37,35 +37,45 @@ function setup() {
 	textAlign(CENTER);
 	textSize(25);
  
- //make simple timer
-  simpleTimer = new Timer(1000);
+ //make simple timer 10 seconds 
+  simpleTimer = new Timer(10000);
   simpleTimer.start();
 
  	// makeWrongButton()
 	makePickButton();
 	makeTiaButton();
 	makePietroButton();
-	drawTimer();
+	
  }
 
 
  function draw() {
-  background(0);
+  background(255, 255,255);
+
+  //timer
   updateTimer();
 
-  textSize(25);
-  fill(255,0,0);
-  text("Which Villager is cuter?", width/2, height/2);
+  textSize(45);
+  fill(255, 120,0);
+  text("Which Villager is cuter?", width/2, height/8);
  
  //draw buttons
  tiaButton.draw();
+ pietroButton.draw();
 
 }
 
 function updateTimer() {
   if( simpleTimer.expired() ) {
-  	elapsedSeconds++;
-  	simpleTimer.start();
+  	fill(255,0,0);
+	textSize(300);
+	text( "OUT OF TIME", midX, midY );
+	frameRate(2);
+  }
+  else {
+  	
+  		fill(255, 255, 0);
+  		text ('correct!');
   }
 }
 
@@ -86,8 +96,13 @@ function makeTiaButton(){
 	tiaButton.color = '#00000000';
 	tiaButton.stroke = '#00000000';
 
+
+	//make it normal sized 
+	tiaButton.width = imgAnimal[0].width;
+  	tiaButton.height = imgAnimal[0].height;
+
 	//location of button 
-	tiaButton.locate(2*(width/3) - tiaButton.width/2, height/2 - tiaButton.height/2);
+	tiaButton.locate(2*(width/5) - tiaButton.width/2, height/1.5 - tiaButton.height/2);
 
 }
 
@@ -98,8 +113,19 @@ function makePietroButton () {
 	pietroButton = new Clickable();
 
 	//set image 
-	pietroButton.image = pietro;
+	pietroButton.image = imgAnimal[1];
 	pietroButton.text = "";
+
+	//no fill or stroke 
+	pietroButton.color = '#00000000';
+	pietroButton.stroke = '#00000000';
+
+	//make it normal sized 
+	pietroButton.width = imgAnimal[1].width;
+  	pietroButton.height = imgAnimal[1].height;
+
+	//location 
+	pietroButton.locate(2*(width/2.5) - pietroButton.width/2, height/1.5 - pietroButton.height/2);
 
 }
 

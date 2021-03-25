@@ -17,6 +17,8 @@ var simpleTimer;
 var yTextPos = 60;
 let bg;
 
+var drawResults;
+
 //images 
 imgAnimal = [];
 
@@ -24,13 +26,12 @@ function preload() {
 	//load images
 	imgAnimal[0] = loadImage('assets/Tia_NH.png');
 	imgAnimal[1] = loadImage('assets/Pietro_NH.png');
-
+	bg = loadImage('assets/acnh_back.jpg');
 }
 
 //center things, call timers and buttons
 
 function setup() {
-	bg = loadImage('assets/acnh_back.jpg');
   	createCanvas(1990, 1080);
 	// imageMode(CENTER);
 	textAlign(CENTER);
@@ -43,9 +44,6 @@ function setup() {
  	// make buttons
 	makeTiaButton();
 	makePietroButton();
-	//make functions 
-	makeDrawCorrect();
-	makeDrawWrong();
  }
 
 
@@ -62,6 +60,8 @@ function setup() {
  //draw buttons
  tiaButton.draw();
  pietroButton.draw();
+
+ drawResults();
 }
 
 function makeTiaButton(){
@@ -110,27 +110,18 @@ function makePietroButton () {
 	pietroButton.onPress = pietroButtonPressed;
 }
 
- function makeDrawWrong () {
-	textSize(40);
-	fill(0, 0, 255 );
-	text('Wrong answer', 1000 , 500);
-
-}
-
- function makeDrawCorrect () {
-	textSize(40);
-	fill(0, 225, 0 );
-	text('Correct', 1000, 500);
+ function drawResults () {
+	text(drawResults, 1000, 500);
 }
 
 tiaButtonPressed = function() {
-	drawFunction = makeDrawWrong;
-
+	
+	text('Wrong answer', 1000 , 500);
 }
 
 pietroButtonPressed = function() {
-	drawFunction = makeDrawCorrect;
 	
+	text('Correct', 1000, 500);
 }
 
 

@@ -5,10 +5,13 @@
 
 ### Overview
 This is an assignment for Interaction Design
-It shows 
+It shows use of two buttons and a countdown timer
 
 ### Technical Details
 
-Modify the sketch.js setup() and draw() functions and begin adding functions!
+There is a timer function 
+There are two clickable buttons 
+When picking a button you will revice a correct or a wrong answer 
+If you do not pick a button in 10 seconds you will get an "out of time" pop up 
 
-##Functions 
+
